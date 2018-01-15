@@ -19,8 +19,8 @@ The goals / steps of this project are the following:
 [image0]: ./images/CNN-nvidia.png "CNN Structure from NVIDIA Developer Blog"
 [image1]: ./images/training-validation.png "Training and Validation Score"
 [image2]: ./images/center_2018_01_13_01_05_25_771.jpg "Center Lane Driving"
+[image3]: ./images/center_2018_01_13_01_05_25_771_flip.jpg "Flipped Image"
 
-[image3]: ./examples/placeholder_small.png "Recovery Image"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
 [image6]: ./examples/placeholder_small.png "Normal Image"
@@ -133,32 +133,28 @@ Its image was reported above.
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded three laps on track one using center lane driving using 
-mouse.
+To capture good driving behavior, I first recorded three laps of driving counter-clockwisely (forward) on track one using center lane driving with mouse.
  Here is an example image of center lane driving:
+![][image2]
+I also recorded three laps of driving clockwisely (reverse)
+on track one using center lane driving.
 
-![alt text][image2]
+Then I recorded car driving over right or left turning lanes
+smoothly over track one. 
 
-I also used 
+I also used sample driving data provided from the course.
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+To augment the data sat, I also flipped images and angles thinking that this would be negated. For example, here is an image that has then been flipped:
 
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
+![][image2]
+![][image3]
 
-Then I repeated this process on track two in order to get more data points.
+I also used the images from the left and right cameras,
+the steering angle would be increased by 0.2 (left camera)
+and decreased by 0.2.
 
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
+This makes the data consists of 92364 images.
+I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-![alt text][image6]
-![alt text][image7]
-
-Etc ....
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
-
-
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I created a generator for each of the training and validation
+data sets. I trained for five epochs with `model.fit_generator()`.  As I mentioned before, it seems that the model is underfitting but it still make through the track.  I will leave the improvement as a future work.
