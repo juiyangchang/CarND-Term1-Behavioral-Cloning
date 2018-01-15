@@ -135,6 +135,7 @@ Its image was reported above.
 
 To capture good driving behavior, I first recorded three laps of driving counter-clockwisely (forward) on track one using center lane driving with mouse.
  Here is an example image of center lane driving:
+
 ![][image2]
 
 I also recorded three laps of driving clockwisely (reverse)
