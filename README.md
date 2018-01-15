@@ -16,10 +16,10 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image0]: ./images/CNN-nvidia.png "CNN Structure from NVIDIA Devloper Blog"
+[image0]: ./images/CNN-nvidia.png "CNN Structure from NVIDIA Developer Blog"
+[image1]: ./images/training-validation.png "Training and Validation Score"
+[image2]: ./images/center_2018_01_13_01_05_25_771.jpg "Center Lane Driving"
 
-[image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
 [image3]: ./examples/placeholder_small.png "Recovery Image"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
@@ -103,9 +103,20 @@ switched to [the structure reported by NVIDIA](https://d17h27t6h515a5.cloudfront
 
 My strategy is kind of trial and error.  Oftentimes I
 get the result of the car driving out of lane even though the
-model seems to be good judging from the training and validation result.
+model seems to be good judging from the training and validation result. Really the decision is kind of fully based
+on how the car drives during the autonomous mode.
 
-I 
+I tried RELU and ELU for activation layer. It seems that 
+ELU provides a faster convergence.  I also looked how the car
+would drive when using RELU and it seems that the car would
+be moving less smoothly compared to models using ELU.
+Batch normalization also seem to improve the convergence speed.
+
+I split the data into training and validation blocks (code line 78) to assess overfitting. The final model I used seems
+a bit underfitting, though, as the training score is slightly
+higher than the validation score in the figure below. 
+![image1]
+
 
 #### 2. Final Model Architecture
 
@@ -113,15 +124,22 @@ The final model architecture (model.py lines 85-121) consisted of a Cropping2D l
 Lambda layer for normalizing the image, followed by three
 convolution blocks with five-by-five kernels and strides of two, followed by two convolution blocks with three-by-three kernels and strides of one, followed by a flatten layer and
 four dense blocks.
-Each convolution block consists of a convlution layer,
+Each convolution block consists of a convolution layer,
 a batch normalization layer and a ELU activation layer.
-Each dense layer has incoming 
+All dense blocks but the last one has dropout layers
+applied to incoming connections. Also all but the last dense blocks uses batch normalization over pre-activation and
+utilizes ELU activation. 
+Its image was reported above.
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded three laps on track one using center lane driving. Here is an example image of center lane driving:
+To capture good driving behavior, I first recorded three laps on track one using center lane driving using 
+mouse.
+ Here is an example image of center lane driving:
 
 ![alt text][image2]
+
+I also used 
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
 
