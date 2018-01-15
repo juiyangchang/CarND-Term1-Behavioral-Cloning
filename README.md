@@ -19,7 +19,7 @@ The goals / steps of this project are the following:
 [image0]: ./images/CNN-nvidia.png "CNN Structure from NVIDIA Developer Blog"
 [image1]: ./images/training-validation.png "Training and Validation Score"
 [image2]: ./images/center_2018_01_13_01_05_25_771.jpg "Center Lane Driving"
-[image3]: ./images/center_2018_01_13_01_05_25_771_flip.jpg "Flipped Image"
+[image3]: ./images/flip.png "Flipped Image"
 
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
